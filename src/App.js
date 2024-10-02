@@ -1,12 +1,14 @@
 import React from 'react';
 import Navigation from './config/navigation'; // Adjust the path as necessary
-// import NavigationBar from './components/NavigationBar'; // Adjust the path as necessary
-import NavigationBar from './config/navigation/navbar.js';
+import { Provider } from 'react-redux';
+import store from './config/redux/store/store';
 
 function App() {
   return (
     <>
+      <Provider store={store}>
       <Navigation />
+      </Provider>
     </>
   );
 }
