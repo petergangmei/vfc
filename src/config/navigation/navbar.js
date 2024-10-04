@@ -12,7 +12,7 @@ const NavBar = () => {
 		<>
 		{!raw_data?.loading &&(
 			<>
-			<nav className='bg-gray-800 text-white p-1'>Emai: voiceforchange@ruangmei.com</nav>
+			<nav className='bg-gray-800 text-white p-1 ps-5'>Email: voiceforchange@ruangmei.com</nav>
 			<header className="w-full text-center mb-5">
 				<h1 className="text-6xl font-bold text-gray-900  pt-5">Voice for Change</h1>
 				<p className="text-lg text-gray-700 my-3 ">Empowering Voices, Inspiring Change</p>

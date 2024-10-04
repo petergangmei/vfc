@@ -1,23 +1,34 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import 'tailwindcss/tailwind.css';
 import { useEffect } from 'react';
 import { getHomeData } from '../../config/redux/features/thunk/apiCallThunk';
 import { useDispatch, useSelector } from 'react-redux';
 import Card from '../../components/common/card';
+import Cookies from 'js-cookie';
+import { apiRequestStart, apiRequestSuccess, apiRequestFailure } from '../../config/redux/features/slices/apiSlice'; 
 
-const HomeScreen = () => {
+
+const HomeScreen = React.memo(() => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const raw_data = useSelector(state => state.apiSlice)
 
+  const handleClick = () => {
+    navigate(`/atl/${raw_data?.data?.data?.featured_article?.slug}`, { state: { data: raw_data?.data?.data?.featured_article} });
+  };
+
   useEffect(() => {
-    dispatch(getHomeData());
-    console.log(' get home data');
+    const cookieExists = Cookies.get('myCookie');
+    if(cookieExists) {
+      dispatch(apiRequestSuccess(JSON.parse(localStorage.getItem('keyData'))))
+    }else{
+      dispatch(getHomeData());
+    }
   }, []);
 
   useEffect(() =>{
-    // console.log(JSON.stringify(raw_data?.data?.data?.featured_article))
   },[raw_data]);
   
   return (
@@ -35,7 +46,7 @@ const HomeScreen = () => {
       {/* Main Image with Hero Section */}
       {raw_data?.data?.data?.featured_article &&(
         <>
-        <section className="w-full max-w-6xl relative">
+        <section className="w-full max-w-6xl relative" onClick={handleClick}>
         {/* raw_data?.data?.data?.featured_article?.cover_image */}
         <div className="relative overflow-hidden bg-cover bg-center rounded-lg shadow-lg" 
           style={{
@@ -88,6 +99,6 @@ const HomeScreen = () => {
     </div>
     </>
   );
-};
+});
 
 export default HomeScreen;

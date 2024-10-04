@@ -5,6 +5,7 @@ import About from '../../screens/about/'; // Correct path for About component
 import ReadScreen from '../../screens/article/read';
 import CategoryScreen from '../../screens/home/category';
 import NavBar from './navbar';
+import Footer from './footer';
 
 const Navigation = () => {
   return (
@@ -17,6 +18,7 @@ const Navigation = () => {
         <Route path="/cat/:name" element={<CategoryScreen />} /> 
 
       </Routes>
+      <Footer />
     </Router>
   );
 };
