@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getNewsBySlug } from '../../config/redux/features/thunk/apiCallThunk';
 import TimeDisplay from '../../config/utils/formatTimeAgoDate';
 import { apiRequestSuccess } from '../../config/redux/features/slices/apiSlice';
+import parse from 'html-react-parser';
+
 
 const ReadScreen = () => {
   const location = useLocation();
@@ -57,7 +59,8 @@ const ReadScreen = () => {
           alt={article.title}
           className="w-full md:w-3/4  rounded-lg mb-4"
         />
-        <p className="text-gray-500 mb-4">{article.content}</p>
+        
+        <p className="text-gray-500 mb-4">{parse(article.content)}</p>
         {/* Add any other article details you want to display */}
       </div>
 
