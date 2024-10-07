@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Card from '../../components/common/card';
 import Cookies from 'js-cookie';
 import { apiRequestStart, apiRequestSuccess, apiRequestFailure } from '../../config/redux/features/slices/apiSlice'; 
-
+import parse from 'html-react-parser';
 
 const HomeScreen = React.memo(() => {
   const dispatch = useDispatch();
@@ -56,7 +56,7 @@ const HomeScreen = React.memo(() => {
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative z-10 text-white text-center py-20">
             <h2 className="text-4xl font-semibold mb-4">{raw_data?.data?.data?.featured_article?.title}</h2>
-            <p className="text-lg mb-6">{raw_data?.data?.data?.featured_article?.content?.substring(0, 200)}...</p>
+            <p className="text-lg mb-6 px-10">{parse(raw_data?.data?.data?.featured_article?.content?.substring(0, 200))}</p>
           </div>
         </div>
       </section>
