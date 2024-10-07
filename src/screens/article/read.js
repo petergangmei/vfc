@@ -60,7 +60,13 @@ const ReadScreen = () => {
           className="w-full md:w-3/4  rounded-lg mb-4"
         />
         
-        <p className="text-gray-500 mb-4">{parse(article.content)}</p>
+        <p className="text-gray-800 mb-4">{parse(article.content)}</p>
+        {article.content_warning &&(
+        <>
+        <hr/>
+        <p className='text-red-600 mt-2 text-sm italic'>* {article.content_warning}</p>
+        </>
+        )}
         {/* Add any other article details you want to display */}
       </div>
 
