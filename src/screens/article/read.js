@@ -5,6 +5,8 @@ import { getNewsBySlug } from '../../config/redux/features/thunk/apiCallThunk';
 import TimeDisplay from '../../config/utils/formatTimeAgoDate';
 import { apiRequestSuccess } from '../../config/redux/features/slices/apiSlice';
 import parse from 'html-react-parser';
+import ShareButtons from '../../components/common/share';
+import { Helmet } from 'react-helmet';
 
 
 const ReadScreen = () => {
@@ -37,16 +39,27 @@ const ReadScreen = () => {
 
   if (!raw_article?.loading && !article) return <div>Article not found.</div>;
 
+  console.log('---- article ---', article?.cover_image);
   return (
-    <div className="max-w-6xl mx-auto p-6 grid grid-cols-12 gap-4">
+    <>
+      <Helmet>
+        <title>VFC - {article?.title}</title>
+        <meta name="description" content='{article?.description}' />
+        <meta property="og:title" content={article?.title} />
+        <meta property="og:description" content={article?.descriptio} />
+        <meta property="og:image" content={article?.cover_image} />
+        <meta property="og:url" content={article?.cover_image} />
+      </Helmet>
+      <div className="max-w-6xl mx-auto p-6 grid grid-cols-12 gap-4">
       {/* Empty space on the left (1/12th of the grid) */}
       <div className="col-span-2 hidden lg:block"></div>
 
       {/* Content section (8/12th of the grid for large screens) */}
       <div className="col-span-12 lg:col-span-8">
         <h1 className="text-3xl font-bold mb-4">{article.title}</h1>
-        <div className="flex items-center text-gray-500">
-          <p className="me-1">Posted:</p> <TimeDisplay timestamp={article.created_at} />
+        <div className="flex items-center mb-5 text-gray-500  justify-between">
+          <p className="me-1 flex text-sm"><p>Posted: </p> <TimeDisplay timestamp={article.created_at} /> </p>
+          <ShareButtons url={window.location.href} title={article.title} />
         </div>
         {article.writer ? (
           <p className="text-gray-500 mb-4"> &mdash; {article.writer}</p>
@@ -73,7 +86,7 @@ const ReadScreen = () => {
         {article.content_warning &&(
         <>
         <hr/>
-        <p className='text-red-600 mt-2 text-xs italic'>* {article.content_warning}</p>
+        <p className='text-gray-600 mt-2 text-xs italic'>* {article.content_warning}</p>
         </>
         )}
         {/* Add any other article details you want to display */}
@@ -82,6 +95,8 @@ const ReadScreen = () => {
       {/* Empty space on the right (1/12th of the grid) */}
       <div className="col-span-2 hidden lg:block"></div>
     </div>
+    </>
+    
   );
 };
 

@@ -8,6 +8,7 @@ import Card from '../../components/common/card';
 import Cookies from 'js-cookie';
 import { apiRequestStart, apiRequestSuccess, apiRequestFailure } from '../../config/redux/features/slices/apiSlice'; 
 import parse from 'html-react-parser';
+import { Helmet } from 'react-helmet';
 
 const HomeScreen = React.memo(() => {
   const dispatch = useDispatch();
@@ -33,6 +34,14 @@ const HomeScreen = React.memo(() => {
   
   return (
     <>
+    <Helmet>
+        <title>Voice for changes </title>
+        <meta name="description" content='voice for changes description' />
+        <meta property="og:title" content='Voice for changes' />
+        {/* <meta property="og:description" content={article?.descriptio} /> */}
+        {/* <meta property="og:image" content={article?.cover_image} /> */}
+        {/* <meta property="og:url" content={article?.cover_image} /> */}
+    </Helmet>
     {raw_data?.loading &&(
       <div className="flex justify-center items-center h-screen">
         <p>Loading...</p>
@@ -46,9 +55,9 @@ const HomeScreen = React.memo(() => {
       {/* Main Image with Hero Section */}
       {raw_data?.data?.data?.featured_article &&(
         <>
-        <section className="w-full max-w-6xl relative" onClick={handleClick}>
+        <section className="w-full mt-5 max-w-6xl relative" onClick={handleClick}>
         {/* raw_data?.data?.data?.featured_article?.cover_image */}
-        <div className="relative overflow-hidden bg-cover bg-center rounded-lg shadow-lg" 
+        <div className="relative overflow-hidden  bg-center rounded-lg shadow-lg" 
           style={{
             backgroundImage: `url(${raw_data?.data?.data?.featured_article?.cover_image})`,
             height: '400px'
@@ -57,7 +66,7 @@ const HomeScreen = React.memo(() => {
           <div className="relative z-10 text-white text-center py-20">
             <h2 className="text-4xl font-semibold mb-4">{raw_data?.data?.data?.featured_article?.title}</h2>
             {raw_data?.data?.data?.featured_article?.description && (
-              <p className="text-lg mb-6 px-10">{parse(raw_data?.data?.data?.featured_article?.description?.substring(0, 200))}</p>
+              <p className="text-lg mb-6 px-10">{parse(raw_data?.data?.data?.featured_article?.description)}</p>
             )}
           </div>
         </div>
@@ -68,30 +77,30 @@ const HomeScreen = React.memo(() => {
 
       {/* Grid Section with Featured Content */}
       <div className='flex flex-col items-center bg-red justify-start mt-12'>
-        <h2 className="text-3xl font-semibold text-gray-900 mb-6">Latest News</h2>
+        <h2 className="text-3xl font-semibold text-gray-900 ">Latest Issues</h2>
       </div>
 
-      <main className="w-full max-w-6xl mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <main className="w-full max-w-6xl mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {raw_data?.data?.data?.latest_article?.map(article => (
            <Card key={article.id} article={article} />
         ))}
       </main>
 
       <div className='flex flex-col items-center bg-red justify-start mt-12'>
-        <h2 className="text-3xl font-semibold text-gray-900 mb-6">Opinion</h2>
+        <h2 className="text-3xl font-semibold text-gray-900 ">Opinion</h2>
       </div>
     
-      <main className="w-full max-w-6xl mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <main className="w-full max-w-6xl mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {raw_data?.data?.data?.article_category.opinion?.map(article => (
           <Card key={article.id} article={article} />
         ))}
       </main>
 
       <div className='flex flex-col items-center bg-red justify-start mt-12'>
-        <h2 className="text-3xl font-semibold text-gray-900 mb-6">Special Issues</h2>
+        <h2 className="text-3xl font-semibold text-gray-900">Special Issues</h2>
       </div>
 
-      <main className="w-full max-w-6xl mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <main className="w-full max-w-6xl mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {raw_data?.data?.data?.article_category?.special_issues?.map(article => (
           <Card key={article.id} article={article} />
         ))}

@@ -12,7 +12,7 @@ const Footer = () => {
         <footer className="bg-gray-900 text-white text-sm py-6 mt-10">
             <div className="container mx-auto flex items-center justify-between">
                 <div>
-                    <p className="ms-5">{new Date().getFullYear()} Your Website. All rights reserved.</p>
+                    <p className="ms-5">{new Date().getFullYear()} @ voice for change. All rights reserved.</p>
                 </div>
                 <div>
                     <ul className="flex items-center">
