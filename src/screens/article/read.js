@@ -28,7 +28,6 @@ const ReadScreen = () => {
   }, [data_]);
 
   useEffect(() => {
-    console.log(' raw article data', raw_article.articles);
     if (raw_article?.articles?.data?.article) {
       setArticle(raw_article?.articles?.data?.article);
     }
@@ -54,17 +53,27 @@ const ReadScreen = () => {
         ) : (
           <p className="text-gray-500 mb-4">&mdash; {article?.author?.name}</p>
         )}
+        {article.description && (
+          <p className="text-gray-500 mb-4">
+            {article?.description}
+          </p>
+        )}
         <img
           src={article.cover_image}
           alt={article.title}
           className="w-full md:w-3/4  rounded-lg mb-4"
         />
+        {article.cover_image_caption && (
+          <p className="text-gray-500 italic mb-5">
+            {article.cover_image_caption}
+          </p>
+        )}
         
         <p className="text-gray-800 mb-4">{parse(article.content)}</p>
         {article.content_warning &&(
         <>
         <hr/>
-        <p className='text-red-600 mt-2 text-sm italic'>* {article.content_warning}</p>
+        <p className='text-red-600 mt-2 text-xs italic'>* {article.content_warning}</p>
         </>
         )}
         {/* Add any other article details you want to display */}

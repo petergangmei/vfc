@@ -21,7 +21,9 @@ const Card = ({ article }) => {
         className="w-full h-48 object-cover rounded-lg mb-4"
       />
       <h2 className="text-1xl font-semibold text-gray-900 mb-4">{article?.title}</h2>
-      <p className="text-gray-700 mb-6">{parse(article.content.substring(0, 100))}</p>
+      {article?.description &&(
+      <p className="text-gray-700 mb-6">{parse(article?.description?.substring(0, 100))}</p>
+      )}
     </div>
   );
 };
